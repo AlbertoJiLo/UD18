@@ -6,24 +6,27 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.io.IOException;
 import java.sql.*;
 
 public class LasQuerys {
 	private Connection conexion = null;
+	
+	//Método para establecer conexión
 	
 	public void establecerCon() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://192.168.1.38:3306?useTimezone=true&serverTimezone=UTC",
 					"alberto","Z001349ebeadr@");
-			System.out.println("Server connected");
+			System.out.println(" Server connected ");
 		} catch (SQLException | ClassNotFoundException ex) {
 			System.out.println("No se ha podido conectar con mi base de datos");
 			System.out.println(ex);
 		}
 	}
 
+	//Método para cerrar la conexión
+	
 	public void cerrarCon() {
 		try {
 			conexion.close();
@@ -33,7 +36,8 @@ public class LasQuerys {
 		}
 	}
 	
-
+	//Método que elimina las bases de datos que les introducimos en caso de existir y crea una con dicho nombre
+	
 	public void crearDB(String name) {
 		try {
 		String Query = "CREATE DATABASE "+name+";";
@@ -47,6 +51,8 @@ public class LasQuerys {
 		}
 		
 	}
+	
+	//Método para crear las tablas
 	
 	public void crearTabla(String db, String name, String valores) {
 
@@ -67,6 +73,8 @@ public class LasQuerys {
         }
 
     }
+	
+	//Método para insertar datos en las tablas
 	
 	public void insertarDatos(String db, String valores) {
 		try {
